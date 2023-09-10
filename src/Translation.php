@@ -4,6 +4,7 @@ namespace Chilister\Translation;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Menu\MenuSection;
+use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
@@ -29,8 +30,18 @@ class Translation extends Tool
      */
     public function menu(Request $request)
     {
-        return MenuSection::make('Translation')
-            ->path('/translation')
-            ->icon('server');
+        return MenuSection::make('Lang & Translations', [
+
+            MenuItem::make('Languages')
+                ->path('/translation/languages'),
+
+            MenuItem::make('Groups')
+                ->path('/translation/groups'),
+
+            MenuItem::make('Translations')
+                ->path('/translation/list'),
+
+        ])->icon('globe-alt')->collapsible();
+
     }
 }
