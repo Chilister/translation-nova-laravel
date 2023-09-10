@@ -37,7 +37,7 @@ php artisan vendor:publish --tag=rzakhanov-translation
     {
         return [
             //....
-            Rzakhanov\Translation\Translation::make()
+            Chilister\Translation\Translation::make()
 
         ];
     }

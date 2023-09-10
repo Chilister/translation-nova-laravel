@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Rzakhanov\Translation\Http\Controllers\Groups;
-use Rzakhanov\Translation\Http\Controllers\Languages;
-use Rzakhanov\Translation\Http\Controllers\Translation;
+use Chilister\Translation\Http\Controllers\Groups;
+use Chilister\Translation\Http\Controllers\Languages;
+use Chilister\Translation\Http\Controllers\Translation;
 
 /*
 |--------------------------------------------------------------------------
