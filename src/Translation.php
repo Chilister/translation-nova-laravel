@@ -1,6 +1,6 @@
 <?php
 
-namespace Rzakhanov\Translation;
+namespace Chilister\Translation;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Menu\MenuSection;

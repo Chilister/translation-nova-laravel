@@ -1,6 +1,6 @@
 <?php
 
-namespace Rzakhanov\Translation\Http\Controllers;
+namespace Chilister\Translation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-use Rzakhanov\Translation\Services\Data;
+use Chilister\Translation\Services\Data;
 
 class Groups extends Controller
 {
@@ -45,7 +45,7 @@ class Groups extends Controller
         if (!isset($groups[$index])) {
 
             collect(array_keys($data['all_languages']))->map(function ($lang) use ($data, $index) {
-                $filepath = config('rzakhanov-translation.lang_path') . $lang . '/' . $index . '.php';
+                $filepath = config('nova-translation-manager.lang_path') . $lang . '/' . $index . '.php';
 
                 if (!file_exists($filepath)) {
                     $configContent = "<?php\n\treturn [ ];\n?>";
@@ -95,7 +95,7 @@ class Groups extends Controller
         if ($old_index !== $index && !in_array($index, $data['groups'])) {
 
             collect(array_keys($data['all_languages']))->map(function ($lang) use ($data, $index, $old_index) {
-                $lang_path = config('rzakhanov-translation.lang_path');
+                $lang_path = config('nova-translation-manager.lang_path');
                 if (!file_exists($lang_path . $lang . '/' . $index . '.php')) {
 
                     /*if(!File::isDirectory($lang_path . 'trash/')) {
@@ -159,7 +159,7 @@ class Groups extends Controller
         try {
 
             collect(array_keys($data['all_languages']))->map(function ($lang) use ($index) {
-                $lang_path = config('rzakhanov-translation.lang_path');
+                $lang_path = config('nova-translation-manager.lang_path');
                 if (file_exists($lang_path . $lang . '/' . $index . '.php')) {
 
                     File::delete($lang_path . $lang . '/' . $index . '.php');

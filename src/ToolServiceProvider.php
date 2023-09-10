@@ -1,6 +1,6 @@
 <?php
 
-namespace Rzakhanov\Translation;
+namespace Chilister\Translation;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Http\Middleware\Authenticate;
 use Laravel\Nova\Nova;
-use Rzakhanov\Translation\Http\Middleware\Authorize;
+use Chilister\Translation\Http\Middleware\Authorize;
 
 class ToolServiceProvider extends ServiceProvider
 {
@@ -20,13 +20,13 @@ class ToolServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/rzakhanov-translation.php' => config_path('rzakhanov-translation.php')
-        ], 'rzakhanov-translation');
+            __DIR__ . '/../config/nova-translation-manager.php' => config_path('nova-translation-manager.php')
+        ], 'nova-translation-manager');
 
         if(File::isDirectory(app_path('Helpers/'))) {
             $this->publishes([
                 __DIR__.'/../helper/langs_helper.php' => app_path('Helpers/langs_helper.php')
-            ], 'rzakhanov-translation');
+            ], 'nova-translation-manager');
         }
 
 

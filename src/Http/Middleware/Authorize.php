@@ -1,9 +1,9 @@
 <?php
 
-namespace Rzakhanov\Translation\Http\Middleware;
+namespace Chilister\Translation\Http\Middleware;
 
 use Laravel\Nova\Nova;
-use Rzakhanov\Translation\Translation;
+use Chilister\Translation\Translation;
 
 class Authorize
 {

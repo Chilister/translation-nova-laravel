@@ -1,6 +1,6 @@
 <?php
 
-namespace Rzakhanov\Translation\Services;
+namespace Chilister\Translation\Services;
 
 use function Clue\StreamFilter\fun;
 
@@ -8,14 +8,14 @@ class Data
 {
     public static function all($search_key = null)
     {
-        $lang_path = config('rzakhanov-translation.lang_path');
+        $lang_path = config('nova-translation-manager.lang_path');
         $files = scandir($lang_path);
         $lang_indexes = $all_indexes = $groups = [];
 
         $lang_paths = collect($files)->filter(function ($shortLang,$index) use(&$all_languages){
             if(preg_match("/^[a-z]{2}$/i", $shortLang)) {
-                if(in_array($shortLang,array_keys(config('rzakhanov-translation.languages')))){
-                    $all_languages[$shortLang] = config('rzakhanov-translation.languages')[$shortLang];
+                if(in_array($shortLang,array_keys(config('nova-translation-manager.languages')))){
+                    $all_languages[$shortLang] = config('nova-translation-manager.languages')[$shortLang];
                     return true;
                 }
             }
@@ -24,7 +24,7 @@ class Data
 
         collect($lang_paths)->map(function ($shortLang, $row_lang) use ( &$groups,$lang_paths, $lang_path, &$lang_indexes, &$all_indexes, $search_key) {
 
-            if (in_array($shortLang, array_keys(config('rzakhanov-translation.languages')))) {
+            if (in_array($shortLang, array_keys(config('nova-translation-manager.languages')))) {
 
                 collect(scandir($lang_path . $shortLang))->map(function ($index) use ( &$groups,&$lang_indexes, &$all_indexes, $lang_path, $shortLang, $search_key, $row_lang, $lang_paths) {
                     $group_pattern = '/^([A-z0-9.-]+)\.php$/i';
@@ -35,7 +35,7 @@ class Data
                         $group_result = (!$search_key || (preg_match("/".preg_quote($search_key)."/i",$group)));
                         $index_result = (!$search_key || preg_match("/".preg_quote($search_key)."/i",$index));
 
-                        if (!in_array($group, config('rzakhanov-translation.disabled_groups'))) {
+                        if (!in_array($group, config('nova-translation-manager.disabled_groups'))) {
                             if(!in_array($group,$groups)) {
                                 $groups[] = $group;
                             }

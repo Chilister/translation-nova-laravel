@@ -1,6 +1,6 @@
 <?php
 
-namespace Rzakhanov\Translation\Http\Controllers;
+namespace Chilister\Translation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Rzakhanov\Translation\Services\Data;
+use Chilister\Translation\Services\Data;
 
 class Translation extends Controller
 {
@@ -60,7 +60,7 @@ class Translation extends Controller
                 $newCollect = array_reverse($data['lang_indexes'][$group][$lang] ?? []);
                 $newCollect[$index] = isset($translation[$lang]) ? (string)$translation[$lang] : null;
 
-                $fopen = fopen(config('rzakhanov-translation.lang_path') . '/' . $lang . '/' . $group . '.php', 'w+');
+                $fopen = fopen(config('nova-translation-manager.lang_path') . '/' . $lang . '/' . $group . '.php', 'w+');
                 fputs($fopen, Data::replaceToContent($newCollect));
                 fclose($fopen);
             });
@@ -119,7 +119,7 @@ class Translation extends Controller
                 unset($newCollect[$old_index]);
                 $newCollect[$index] = isset($translation[$lang]) ? (string)$translation[$lang] : null;
 
-                $fopen = fopen(config('rzakhanov-translation.lang_path') . '/' . $lang . '/' . $group . '.php', 'w+');
+                $fopen = fopen(config('nova-translation-manager.lang_path') . '/' . $lang . '/' . $group . '.php', 'w+');
                 fputs($fopen, Data::replaceToContent($newCollect));
                 fclose($fopen);
             });
@@ -164,7 +164,7 @@ class Translation extends Controller
                 $newCollect = array_reverse($data['lang_indexes'][$group][$lang]??[]);
                 unset($newCollect[$index]);
 
-                $fopen = fopen(config('rzakhanov-translation.lang_path') . '/' . $lang . '/' . $group . '.php', 'w+');
+                $fopen = fopen(config('nova-translation-manager.lang_path') . '/' . $lang . '/' . $group . '.php', 'w+');
                 fputs($fopen, Data::replaceToContent($newCollect));
                 fclose($fopen);
             });

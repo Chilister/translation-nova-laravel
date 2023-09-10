@@ -1,6 +1,6 @@
 <?php
 
-namespace Rzakhanov\Translation\Http\Controllers;
+namespace Chilister\Translation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-use Rzakhanov\Translation\Services\Data;
+use Chilister\Translation\Services\Data;
 
 class Languages extends Controller
 {
@@ -51,11 +51,11 @@ class Languages extends Controller
 
             $configContent .= Data::replaceToPureContent($data) . "\n\n\t];";
 
-            $fopen = fopen(config_path('rzakhanov-translation.php'), 'w+');
+            $fopen = fopen(config_path('nova-translation-manager.php'), 'w+');
             fputs($fopen, $configContent);
             fclose($fopen);
 
-            File::copyDirectory(config('rzakhanov-translation.lang_path') .'/'. config('rzakhanov-translation.default_locale'), config('rzakhanov-translation.lang_path') . $index);
+            File::copyDirectory(config('nova-translation-manager.lang_path') .'/'. config('nova-translation-manager.default_locale'), config('nova-translation-manager.lang_path') . $index);
 
         } else {
             return response()->json([
@@ -96,8 +96,8 @@ class Languages extends Controller
 
         if ($old_index!==$index && !isset($data[$index])) {
 
-            File::copyDirectory(config('rzakhanov-translation.lang_path') .'/'. $old_index, config('rzakhanov-translation.lang_path') .'/'. $old_index.'_old');
-            File::move(config('rzakhanov-translation.lang_path') .'/'. $old_index, config('rzakhanov-translation.lang_path') .'/'. $index );
+            File::copyDirectory(config('nova-translation-manager.lang_path') .'/'. $old_index, config('nova-translation-manager.lang_path') .'/'. $old_index.'_old');
+            File::move(config('nova-translation-manager.lang_path') .'/'. $old_index, config('nova-translation-manager.lang_path') .'/'. $index );
 
         }elseif($old_index!==$index && isset($data[$index])) {
             return response()->json([
@@ -113,7 +113,7 @@ class Languages extends Controller
 
         $configContent .= Data::replaceToPureContent($data) . "\n\n\t];";
 
-        $fopen = fopen(config_path('rzakhanov-translation.php'), 'w+');
+        $fopen = fopen(config_path('nova-translation-manager.php'), 'w+');
         fputs($fopen, $configContent);
         fclose($fopen);
 
@@ -150,12 +150,12 @@ class Languages extends Controller
 
         try {
 
-            File::deleteDirectory(config('rzakhanov-translation.lang_path') . $index . '_old');
-            File::move(config('rzakhanov-translation.lang_path') . '/'.$index, config('rzakhanov-translation.lang_path') .'/'. $index . '_old');
+            File::deleteDirectory(config('nova-translation-manager.lang_path') . $index . '_old');
+            File::move(config('nova-translation-manager.lang_path') . '/'.$index, config('nova-translation-manager.lang_path') .'/'. $index . '_old');
 
             return response()->json([
                 'response' => true,
-                'path' => config('rzakhanov-translation.lang_path') . $index,
+                'path' => config('nova-translation-manager.lang_path') . $index,
                 'message' => 'Successfully deleted',
             ]);
         } catch (\Exception $exception) {
